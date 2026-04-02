@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CircularProgressIndicator
@@ -30,9 +31,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
+import coil.compose.AsyncImage
 import com.example.openweatherapiapp_mvvm_tc_pmo_project_ford.model.WeatherResponse
 import com.example.openweatherapiapp_mvvm_tc_pmo_project_ford.states.WeatherResult
 import com.example.openweatherapiapp_mvvm_tc_pmo_project_ford.ui.theme.OpenWeatherApiApp_MVVM_TC_PMO_Project_FordTheme
@@ -111,6 +115,16 @@ fun WeatherDetails(data: WeatherResponse) {
         Text(
             text = data.weather.getOrNull(0)?.description ?: "",
             style = MaterialTheme.typography.bodyLarge
+        )
+
+        val iconCode = data.weather.getOrNull(0)?.icon
+        AsyncImage(
+            modifier = Modifier.size(160.dp),
+            model = "https://openweathermap.org/payload/api/media/file/$iconCode.png",
+            contentDescription = "Weather Icon",
+            contentScale = ContentScale.Crop,
+            placeholder = painterResource(R.drawable.ic_launcher_foreground),
+            error = painterResource(R.drawable.ic_launcher_foreground)
         )
 
         Row(
