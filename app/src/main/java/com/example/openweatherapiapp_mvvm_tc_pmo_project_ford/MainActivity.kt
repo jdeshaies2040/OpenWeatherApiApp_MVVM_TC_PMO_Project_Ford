@@ -23,8 +23,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WeatherPage(modifier: Modifier = Modifier, viewModel: WeatherViewModel) {
     var city by remember { mutableStateOf("") }
-    val weatherResult by viewModel.cityWeather.observeAsState()
+    val weatherResult by viewModel.cityWeather.collectAsState()
 
     Column(
         modifier = modifier
@@ -120,7 +120,7 @@ fun WeatherDetails(data: WeatherResponse) {
         val iconCode = data.weather.getOrNull(0)?.icon
         AsyncImage(
             modifier = Modifier.size(160.dp),
-            model = "https://openweathermap.org/payload/api/media/file/$iconCode.png",
+            model = "https://openweathermap.org/img/wn/$iconCode@2x.png",
             contentDescription = "Weather Icon",
             contentScale = ContentScale.Crop,
             placeholder = painterResource(R.drawable.ic_launcher_foreground),
