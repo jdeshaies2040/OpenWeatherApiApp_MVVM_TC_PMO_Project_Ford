@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OpenWeatherApiApp_MVVM_TC_PMO_Project_Ford</string>
+    <string name="app_name_display">Open Weather App</string>
 </resources>
