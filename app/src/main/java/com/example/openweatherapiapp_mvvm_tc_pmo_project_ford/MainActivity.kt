@@ -105,7 +105,7 @@ fun WeatherDetails(data: WeatherResponse) {
         Text(text = data.name, style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "${data.main.temp} K",
+            text = "${(data.main.temp - 273.15).toInt()} °C",
             style = MaterialTheme.typography.displayLarge
         )
         Text(
